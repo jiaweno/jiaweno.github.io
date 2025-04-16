@@ -162,3 +162,101 @@ tags: [标签1, 标签2]
 ## 许可证
 
 MIT License
+
+## Git 使用指南
+
+### 基础概念
+
+1. **工作区（Working Directory）**
+   - 当前目录下的所有文件
+   - 直接编辑的地方
+
+2. **暂存区（Staging Area）**
+   - 临时存储修改的地方
+   - 使用 `git add` 命令将修改添加到暂存区
+
+3. **本地仓库（Local Repository）**
+   - 使用 `git commit` 提交的历史记录
+   - 包含所有版本信息
+
+4. **远程仓库（Remote Repository）**
+   - GitHub 上的仓库
+   - 用于多人协作和备份
+
+### 日常博客更新流程
+
+1. **写作前更新本地代码**
+```bash
+git pull origin main  # 从远程获取最新代码
+```
+
+2. **创建新文章**
+- 在 `_posts` 目录下创建文章
+- 文件名格式：`YYYY-MM-DD-title.md`
+
+3. **提交更改**
+```bash
+git add .  # 添加所有更改到暂存区
+git commit -m "post: 添加新文章《文章标题》"  # 提交更改
+git push origin main  # 推送到 GitHub
+```
+
+### 常用 Git 命令
+
+```bash
+# 查看仓库状态
+git status
+
+# 查看修改内容
+git diff
+
+# 查看提交历史
+git log
+
+# 撤销工作区修改
+git checkout -- <file>
+
+# 撤销暂存区修改
+git reset HEAD <file>
+
+# 创建新分支
+git checkout -b <branch-name>
+
+# 切换分支
+git checkout <branch-name>
+```
+
+### 关于合并冲突
+
+合并冲突（Merge Conflict）发生在以下情况：
+1. 同一个文件的同一部分被不同人（或分支）修改
+2. Git 无法自动决定使用哪个版本
+
+解决冲突的步骤：
+1. 打开冲突文件，会看到类似下面的标记：
+```
+<<<<<<< HEAD
+当前分支的内容
+=======
+其他分支的内容
+>>>>>>> branch-name
+```
+
+2. 手动编辑文件，选择要保留的内容
+3. 删除冲突标记
+4. 使用 `git add` 标记冲突已解决
+5. 使用 `git commit` 完成合并
+
+### 提交规范
+
+为保持提交历史清晰，建议使用以下格式：
+
+- `post: ` 添加或修改文章
+- `feat: ` 添加新功能
+- `fix: ` 修复问题
+- `docs: ` 更新文档
+- `style: ` 修改样式
+- `refactor: ` 代码重构
+- `chore: ` 其他修改
+
+示例：`git commit -m "post: 添加新文章《Git 入门指南》"`
