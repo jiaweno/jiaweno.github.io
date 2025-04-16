@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-04-16T10:16:31+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">我的技术博客</title><subtitle>一个记录技术探索和学习心得的个人空间</subtitle><entry><title type="html">Web开发最佳实践指南</title><link href="http://localhost:4000/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices.html" rel="alternate" type="text/html" title="Web开发最佳实践指南" /><published>2024-04-16T14:00:00+08:00</published><updated>2024-04-16T14:00:00+08:00</updated><id>http://localhost:4000/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices</id><content type="html" xml:base="http://localhost:4000/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices.html"><![CDATA[<h1 id="web开发最佳实践指南">Web开发最佳实践指南</h1>
+
+<p>在现代Web开发中，遵循最佳实践不仅能提高代码质量，还能确保网站的性能和可维护性。本文将分享一些重要的Web开发最佳实践。</p>
+
+<h2 id="1-性能优化">1. 性能优化</h2>
+
+<h3 id="前端性能">前端性能</h3>
+<ul>
+  <li>使用适当的图片格式和大小</li>
+  <li>实现懒加载</li>
+  <li>压缩和合并CSS/JavaScript文件</li>
+  <li>利用浏览器缓存</li>
+</ul>
+
+<h3 id="后端性能">后端性能</h3>
+<ul>
+  <li>实现数据库索引</li>
+  <li>使用缓存系统</li>
+  <li>优化API响应</li>
+  <li>采用CDN加速</li>
+</ul>
+
+<h2 id="2-安全性">2. 安全性</h2>
+
+<h3 id="常见安全措施">常见安全措施</h3>
+<ul>
+  <li>使用HTTPS</li>
+  <li>实施CSP（内容安全策略）</li>
+  <li>防止XSS和CSRF攻击</li>
+  <li>安全的密码存储</li>
+</ul>
+
+<h3 id="数据保护">数据保护</h3>
+<ul>
+  <li>输入验证</li>
+  <li>参数化查询</li>
+  <li>错误处理</li>
+  <li>日志记录</li>
+</ul>
+
+<h2 id="3-代码质量">3. 代码质量</h2>
+
+<h3 id="编码规范">编码规范</h3>
+<ul>
+  <li>遵循统一的代码风格</li>
+  <li>使用ESLint等工具</li>
+  <li>编写清晰的注释</li>
+  <li>模块化开发</li>
+</ul>
+
+<h3 id="测试实践">测试实践</h3>
+<ul>
+  <li>单元测试</li>
+  <li>集成测试</li>
+  <li>端到端测试</li>
+  <li>持续集成</li>
+</ul>
+
+<h2 id="4-用户体验">4. 用户体验</h2>
+
+<h3 id="响应式设计">响应式设计</h3>
+<ul>
+  <li>移动优先设计</li>
+  <li>弹性布局</li>
+  <li>适配不同设备</li>
+  <li>优化触摸体验</li>
+</ul>
+
+<h3 id="可访问性">可访问性</h3>
+<ul>
+  <li>语义化HTML</li>
+  <li>ARIA标签</li>
+  <li>键盘导航</li>
+  <li>颜色对比度</li>
+</ul>
+
+<h2 id="5-开发流程">5. 开发流程</h2>
+
+<h3 id="版本控制">版本控制</h3>
+<ul>
+  <li>使用Git进行版本控制</li>
+  <li>遵循Git Flow工作流</li>
+  <li>编写清晰的提交信息</li>
+  <li>定期代码审查</li>
+</ul>
+
+<h3 id="文档管理">文档管理</h3>
+<ul>
+  <li>API文档</li>
+  <li>代码注释</li>
+  <li>开发指南</li>
+  <li>部署文档</li>
+</ul>
+
+<h2 id="总结">总结</h2>
+
+<p>Web开发是一个不断发展的领域，保持学习新技术和最佳实践的习惯非常重要。通过遵循这些最佳实践，我们可以构建更好的Web应用程序。</p>]]></content><author><name></name></author><category term="技术" /><category term="Web开发" /><category term="前端开发" /><category term="后端开发" /><category term="性能优化" /><summary type="html"><![CDATA[Web开发最佳实践指南]]></summary></entry><entry><title type="html">Jekyll博客入门指南</title><link href="http://localhost:4000/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll.html" rel="alternate" type="text/html" title="Jekyll博客入门指南" /><published>2024-04-16T10:00:00+08:00</published><updated>2024-04-16T10:00:00+08:00</updated><id>http://localhost:4000/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll</id><content type="html" xml:base="http://localhost:4000/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll.html"><![CDATA[<h1 id="jekyll博客入门指南">Jekyll博客入门指南</h1>
+
+<p>Jekyll是一个简单的、博客感知的静态网站生成器。它使用模板创建一个静态网站，这意味着您的网站将加载得更快，更安全，并且更容易维护。</p>
+
+<h2 id="为什么选择jekyll">为什么选择Jekyll？</h2>
+
+<ol>
+  <li><strong>简单易用</strong>
+    <ul>
+      <li>不需要数据库</li>
+      <li>不需要复杂的后端</li>
+      <li>Markdown写作支持</li>
+    </ul>
+  </li>
+  <li><strong>高度可定制</strong>
+    <ul>
+      <li>支持自定义主题</li>
+      <li>灵活的插件系统</li>
+      <li>完全控制您的内容</li>
+    </ul>
+  </li>
+  <li><strong>GitHub Pages集成</strong>
+    <ul>
+      <li>免费托管</li>
+      <li>自动构建</li>
+      <li>简单部署</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="快速开始">快速开始</h2>
+
+<ol>
+  <li>安装Ruby和Jekyll：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>bundler jekyll
+</code></pre></div>    </div>
+  </li>
+  <li>创建新站点：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new my-blog
+<span class="nb">cd </span>my-blog
+</code></pre></div>    </div>
+  </li>
+  <li>启动本地服务器：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="写作技巧">写作技巧</h2>
+
+<p>在Jekyll中，您可以使用Markdown来写作博客文章。以下是一些基本的Markdown语法：</p>
+
+<ul>
+  <li><strong>标题</strong>: 使用<code class="language-plaintext highlighter-rouge">#</code>符号</li>
+  <li><strong>强调</strong>: 使用<code class="language-plaintext highlighter-rouge">*</code>或<code class="language-plaintext highlighter-rouge">_</code></li>
+  <li><strong>列表</strong>: 使用<code class="language-plaintext highlighter-rouge">-</code>或<code class="language-plaintext highlighter-rouge">1.</code></li>
+  <li><strong>链接</strong>: <code class="language-plaintext highlighter-rouge">[文本](URL)</code></li>
+  <li><strong>图片</strong>: <code class="language-plaintext highlighter-rouge">![替代文本](图片URL)</code></li>
+</ul>
+
+<h2 id="下一步">下一步</h2>
+
+<ol>
+  <li>学习更多关于Jekyll的主题定制</li>
+  <li>探索Jekyll的插件系统</li>
+  <li>优化您的网站性能</li>
+  <li>添加评论系统</li>
+</ol>
+
+<p>Jekyll的学习曲线相对平缓，但它提供了强大的功能来创建专业的博客网站。通过不断实践和探索，您会发现Jekyll是一个非常棒的博客平台。</p>]]></content><author><name></name></author><category term="技术" /><category term="Jekyll" /><category term="静态网站" /><category term="博客" /><category term="Jekyll" /><summary type="html"><![CDATA[Jekyll博客入门指南]]></summary></entry></feed>

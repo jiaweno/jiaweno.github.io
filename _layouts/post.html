@@ -1,0 +1,47 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}
+      {%- if page.categories.size > 0 -%}
+      <span class="post-categories">
+        分类：
+        {% for category in page.categories %}
+        <a href="{{ '/categories/#' | append: category | relative_url }}">{{ category }}</a>
+        {% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </span>
+      {%- endif -%}
+      
+      {%- if page.tags.size > 0 -%}
+      <span class="post-tags">
+        标签：
+        {% for tag in page.tags %}
+        <a href="{{ '/tags/#' | append: tag | relative_url }}">{{ tag }}</a>
+        {% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </span>
+      {%- endif -%}
+    </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content | replace: '<h1', '<h1 id="title"' | replace: '<h2', '<h2 id="h2-' | replace: '<h3', '<h3 id="h3-' | replace: '<h4', '<h4 id="h4-' }}
+  </div>
+
+  {%- if site.disqus.shortname -%}
+    {%- include disqus_comments.html -%}
+  {%- endif -%}
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

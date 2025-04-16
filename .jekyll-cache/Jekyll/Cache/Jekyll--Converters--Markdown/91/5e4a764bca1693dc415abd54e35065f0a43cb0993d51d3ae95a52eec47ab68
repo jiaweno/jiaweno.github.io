@@ -1,0 +1,72 @@
+I"�
+<h1 id="jekyll博客入门指南">Jekyll博客入门指南</h1>
+
+<p>Jekyll是一个简单的、博客感知的静态网站生成器。它使用模板创建一个静态网站，这意味着您的网站将加载得更快，更安全，并且更容易维护。</p>
+
+<h2 id="为什么选择jekyll">为什么选择Jekyll？</h2>
+
+<ol>
+  <li><strong>简单易用</strong>
+    <ul>
+      <li>不需要数据库</li>
+      <li>不需要复杂的后端</li>
+      <li>Markdown写作支持</li>
+    </ul>
+  </li>
+  <li><strong>高度可定制</strong>
+    <ul>
+      <li>支持自定义主题</li>
+      <li>灵活的插件系统</li>
+      <li>完全控制您的内容</li>
+    </ul>
+  </li>
+  <li><strong>GitHub Pages集成</strong>
+    <ul>
+      <li>免费托管</li>
+      <li>自动构建</li>
+      <li>简单部署</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="快速开始">快速开始</h2>
+
+<ol>
+  <li>安装Ruby和Jekyll：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>bundler jekyll
+</code></pre></div>    </div>
+  </li>
+  <li>创建新站点：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new my-blog
+<span class="nb">cd </span>my-blog
+</code></pre></div>    </div>
+  </li>
+  <li>启动本地服务器：
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="写作技巧">写作技巧</h2>
+
+<p>在Jekyll中，您可以使用Markdown来写作博客文章。以下是一些基本的Markdown语法：</p>
+
+<ul>
+  <li><strong>标题</strong>: 使用<code class="language-plaintext highlighter-rouge">#</code>符号</li>
+  <li><strong>强调</strong>: 使用<code class="language-plaintext highlighter-rouge">*</code>或<code class="language-plaintext highlighter-rouge">_</code></li>
+  <li><strong>列表</strong>: 使用<code class="language-plaintext highlighter-rouge">-</code>或<code class="language-plaintext highlighter-rouge">1.</code></li>
+  <li><strong>链接</strong>: <code class="language-plaintext highlighter-rouge">[文本](URL)</code></li>
+  <li><strong>图片</strong>: <code class="language-plaintext highlighter-rouge">![替代文本](图片URL)</code></li>
+</ul>
+
+<h2 id="下一步">下一步</h2>
+
+<ol>
+  <li>学习更多关于Jekyll的主题定制</li>
+  <li>探索Jekyll的插件系统</li>
+  <li>优化您的网站性能</li>
+  <li>添加评论系统</li>
+</ol>
+
+<p>Jekyll的学习曲线相对平缓，但它提供了强大的功能来创建专业的博客网站。通过不断实践和探索，您会发现Jekyll是一个非常棒的博客平台。</p>
+:ET

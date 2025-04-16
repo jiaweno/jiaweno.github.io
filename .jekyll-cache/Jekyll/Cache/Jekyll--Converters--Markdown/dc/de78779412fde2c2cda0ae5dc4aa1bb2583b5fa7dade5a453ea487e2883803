@@ -1,0 +1,156 @@
+I"�
+<div class="tag-cloud">
+  
+    <a href="#Jekyll" class="tag-link" style="font-size: 84%">
+      Jekyll
+      <span class="tag-count">(1)</span>
+    </a>
+  
+    <a href="#前端开发" class="tag-link" style="font-size: 84%">
+      前端开发
+      <span class="tag-count">(1)</span>
+    </a>
+  
+    <a href="#博客" class="tag-link" style="font-size: 84%">
+      博客
+      <span class="tag-count">(1)</span>
+    </a>
+  
+    <a href="#后端开发" class="tag-link" style="font-size: 84%">
+      后端开发
+      <span class="tag-count">(1)</span>
+    </a>
+  
+    <a href="#性能优化" class="tag-link" style="font-size: 84%">
+      性能优化
+      <span class="tag-count">(1)</span>
+    </a>
+  
+    <a href="#静态网站" class="tag-link" style="font-size: 84%">
+      静态网站
+      <span class="tag-count">(1)</span>
+    </a>
+  
+</div>
+
+<div class="tag-list">
+  
+    <h2 id="Jekyll">Jekyll</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll.html">
+              Jekyll博客入门指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+    <h2 id="前端开发">前端开发</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices.html">
+              Web开发最佳实践指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+    <h2 id="博客">博客</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll.html">
+              Jekyll博客入门指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+    <h2 id="后端开发">后端开发</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices.html">
+              Web开发最佳实践指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+    <h2 id="性能优化">性能优化</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/web%E5%BC%80%E5%8F%91/2024/04/16/web-development-best-practices.html">
+              Web开发最佳实践指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+    <h2 id="静态网站">静态网站</h2>
+    <ul>
+      
+        <li>
+          <span class="post-meta">2024-04-16</span>
+          <h3>
+            <a class="post-link" href="/%E6%8A%80%E6%9C%AF/jekyll/2024/04/16/getting-started-with-jekyll.html">
+              Jekyll博客入门指南
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+<style>
+.tag-cloud {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tag-link {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  color: #1e88e5;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.tag-link:hover {
+  background-color: rgba(30, 136, 229, 0.1);
+}
+
+.tag-count {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.tag-list h2 {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+</style>
+
+:ET
