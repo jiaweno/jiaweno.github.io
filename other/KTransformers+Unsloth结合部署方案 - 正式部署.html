@@ -1,0 +1,1627 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jiaweno.github.io/other/KTransformers%2BUnsloth%E7%BB%93%E5%90%88%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%20-%20%E6%AD%A3%E5%BC%8F%E9%83%A8%E7%BD%B2.html">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>KTransformers+Unsloth结合部署方案 正式部署 - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deepseek-r1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../index.html" title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              KTransformers+Unsloth结合部署方案   正式部署
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    1.大模型基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            1.大模型基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅前言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅大模型专业术语解释
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deepseek-r1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、本地低成本部署DeepSeek-R1方案
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、本地低成本部署DeepSeek-R1方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ktransformerunsloth" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. KTransformer与Unsloth动态量化方案介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ktransformersunsloth" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 最高性价比方案：KTransformers+Unsloth结合部署方案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.KTransformers本地部署硬件配置说明
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、KTransformers入门介绍与基础环境搭建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、KTransformers入门介绍与基础环境搭建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.KTransformers项目入门介绍
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.KTransformers项目入门介绍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 项目定位
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 项目参考资料
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 KTransformers支持的模型及运行方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 KTransformers部署方法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2deepseek-r1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.DeepSeek R1模型权重与配置文件下载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他镜像源（备用）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ktransformerunsloth" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、KTransformer+Unsloth动态量化模型部署与调用流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、KTransformer+Unsloth动态量化模型部署与调用流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 安装基础依赖
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cudaubuntu2204" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装CUDA参考命令，ubuntu2204系统下：
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pytorchubuntu2204" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装pytorch，ubuntu2204系统下：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安装pytorch，ubuntu2204系统下：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-ktransformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 安装KTransformers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3ktransformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.运行KTransformer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.实际运行效果展示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apiopen-webui" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、创建API与接入Open-WebUI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、创建API与接入Open-WebUI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1api" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.开启API服务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. API调用流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-apiopen-webui" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 将API接入Open-WebUI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h2 id="deepseek-r1">一、本地低成本部署DeepSeek-R1方案</h2>
+<h3 id="1-ktransformerunsloth">1. KTransformer与Unsloth动态量化方案介绍</h3>
+<p>​        截至目前，DeepSeek R1模型本地部署最具性价比的方案就是清华大学团队提出的KTransformer方案和Unsloth动态量化方案，两套方案都是借助CPU+GPU混合推理，来降低GPU购买的硬件成本，并且底层CPU推理实现也都是基于llama.cpp。</p>
+<p>​       所不同的是，KTransformer采用了一种全新的计算流程，使得MLA/KV-Cache可以在GPU上运行，而其他模型参数则在CPU上完成计算，从而大幅加快CPU的计算速度。</p>
+<p>​       这种计算流程能够大幅加快DeepSeek MoE架构算法的计算速度，根据官方给出的数据，最高能得到14tokens/s，是llama.cpp推理速度的两倍。</p>
+<p>​       但这套方案存在的问题，则主要有以下两个：</p>
+<ul>
+<li>其一是模型并发较弱，由于采用了非常特殊的计算结构，导致无法通过增加GPU数量来增加并发；</li>
+<li>其二是需要较大内存才能运行;</li>
+</ul>
+<p>​       Unsloth提出的动态量化方案会更加综合一些，所谓动态量化的技术，指的是可以围绕模型的不同层，进行不同程度的量化，关键层呢，就量化的少一些，非关键层量化的多一些，最终得到了一组比Q2量化程度更深的模型组，分别是1.58-bit、1.73-bit和2.22-bit模型组。尽管量化程度很深，但实际性能其实并不弱。根据测试结果，1.58-bit动态量化几乎能达到90%以上Q4_K_M性能，远比Q2_K_M性能强得多。</p>
+<p>​       此外，Unsloth提供了一套可以把模型权重分别加载到CPU和GPU上的方法，用户可以根据自己实际硬件情况，选择加载若干层模型权重到GPU上，然后剩下的模型权重加载到CPU内存上进行计算。</p>
+<p>​       在实际部署的过程中，我们可以根据硬件情况，有选择的将一部分模型的层放到GPU上运行，其他层放在CPU上运行，从而降低GPU负载。最低显存+内存&gt;=200G，即可运行1.58bit模型。</p>
+<p>​       简而言之，Unsloth方案优势如下：</p>
+<ul>
+<li>和llama.cpp深度融合，直接通过参数设置即可自由调度CPU和GPU计算资源，灵活高效，且能够直接和ollama、vLLM、Open-WebUI等框架兼容。</li>
+<li>深度挖掘GPU性能，并发量有保障。</li>
+</ul>
+<h3 id="2-ktransformersunsloth">2. 最高性价比方案：KTransformers+Unsloth结合部署方案</h3>
+<p>​        那么，能不能将这两个方案结合起来部署呢？<strong>一方面，借助Unsloth 1.58bit动态模型的高性能特性，一方面借助KTransformers的高性能计算特性，就能进一步压缩硬件成本、获得更好的计算性能，同时由于1.58bit动态量化模型本身占用存储空间更少，推理并发数量也能有所提升。</strong></p>
+<p>​        这确实是非常不错的思路，并且由于动态量化本身并没有改变模型结构，因此理论上也是可行的。但很遗憾，截至目前，KTransformers的三个版本，V0.2、V0.21和V0.3暂时都不支持Unsloth动态量化模型的推理。现在官方稳定版在运行Unsloth动态量化模型时会出现报错。</p>
+<p>​       因此，我们团队在深入研究KTransformers源码后，对V0.2版本的部分代码进行了修改，并最终适配1.58bit Unsloth动态量化模型，<strong>使得最低可以在60G内存、14G显存下顺利运行</strong>，至强3代CPU+DDR4+虚拟GPU运行时效果如下，平均速度推理：<strong>5tokens/s</strong>。需要注意的是，相同1.58bit模型，若使用Unsloth+llama.cpp运行方案，则需要至少4卡4090（分配35层在GPU上计算）才能达到相同的效果。</p>
+<p>​       并且在硬件配置达标的情况下，如至强4代以上+DDR5，则能达到12 tokens/s，且在5个左右并发时，能达到6-8 tokens/s。本节公开课，我们就来详细介绍下如何实现KTransformers+Unsloth联合部署。</p>
+<h3 id="3ktransformers">3.KTransformers本地部署硬件配置说明</h3>
+<p>​        这里需要说明的是，KTransformers项目本身运行效果极大程度依赖CPU和内存型号，一般来说至强4代或第四代霄龙+DDR5才能保证14tokens/s。</p>
+<ul>
+<li>演示配置：</li>
+<li>PyTorch 2.5.1，Python 3.12(ubuntu22.04)，Cuda 12.4</li>
+<li>操作系统：Ubuntu 22.04 （40GB纯净系统）</li>
+<li><strong>GPU</strong>：RTX 4090-24GB * 2</li>
+<li><strong>CPU</strong>：INTEL(R) XEON(R) PLATINUM 8566C</li>
+<li>
+<p><strong>内存</strong>：128GB DDR4</p>
+</li>
+<li>
+<p>KTransformer项目部署硬件配置方面需要注意如下事项：</p>
+</li>
+<li>GPU对实际运行效率提升不大，单卡3090、单卡4090、或者是多卡GPU服务器都没有太大影响，只需要留足14G以上显存即可；</li>
+<li>若是多卡服务器，则可以进一步尝试手动编写模型权重卸载规则，使用更多的GPU进行推理，可以一定程度减少内存需求，但对于实际运行效率提升不大。最省钱的方案仍然是单卡GPU+大内存配置；</li>
+<li>KTransformer目前开放了V2.0、V2.1和V3.0三个版本（V3.0目前只有预览版，只支持二进制文件下载和安装），其中V2.0和V2.1支持各类CPU，但从V3.0开始，只支持AMX CPU，也就是最新几代的Intel CPU。这几个版本实际部署流程和调用指令没有任何区别，公开课以适配性最广泛的V2.0版本进行演示，若当前CPU支持AMX，则可以考虑使用V3.0进行实验，推理速度会大幅加快。</li>
+<li>CPU AMX（Advanced Matrix Extensions）是Intel在其Sapphire Rapids系列处理器中推出的一种新型硬件加速指令集，旨在提升矩阵运算的性能，尤其是针对深度学习和人工智能应用。</li>
+</ul>
+<h2 id="ktransformers">二、KTransformers入门介绍与基础环境搭建</h2>
+<h3 id="1ktransformers">1.KTransformers项目入门介绍</h3>
+<h4 id="11">1.1 项目定位</h4>
+<p>KTransformers（发音为“Quick Transformers”）旨在通过先进的内核优化和计算分布/并行化策略来增强你使用Transformers的体验。</p>
+<p>KTransformers 是一个灵活、以 Python 为中心的框架，其核心设计理念是可扩展性。用户仅需一行代码，即可实现优化模块的集成，并享受到以下特性：</p>
+<ul>
+<li><strong>与 Transformers 兼容的接口</strong></li>
+<li><strong>符合 OpenAI 和 Ollama 规范的 RESTful API</strong></li>
+<li><strong>一个简化版的 ChatGPT 风格 Web UI</strong>（最新版已弃用）</li>
+</ul>
+<p>项目定位将 KTransformers 打造成一个灵活的平台，供用户探索和实验创新的大模型推理优化技术。因此，项目支持编写自定义脚本来实现模型权重的灵活卸载。</p>
+<h4 id="12">1.2 项目参考资料</h4>
+<ul>
+<li>GitHub主页：https://github.com/kvcache-ai/ktransformers</li>
+<li>项目使用指南：https://kvcache-ai.github.io/ktransformers/index.html</li>
+</ul>
+<h4 id="13-ktransformers">1.3 KTransformers支持的模型及运行方式</h4>
+<ul>
+<li><strong>不同模型所需运行条件：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Model Name</th>
+<th>Model Size</th>
+<th>VRAM</th>
+<th>Minimum DRAM</th>
+<th>Recommended DRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeepSeek-R1-q4_k_m</td>
+<td>377G</td>
+<td>14G</td>
+<td>382G</td>
+<td>512G</td>
+</tr>
+<tr>
+<td>DeepSeek-V3-q4_k_m</td>
+<td>377G</td>
+<td>14G</td>
+<td>382G</td>
+<td>512G</td>
+</tr>
+<tr>
+<td>DeepSeek-V2-q4_k_m</td>
+<td>133G</td>
+<td>11G</td>
+<td>136G</td>
+<td>192G</td>
+</tr>
+<tr>
+<td>DeepSeek-V2.5-q4_k_m</td>
+<td>133G</td>
+<td>11G</td>
+<td>136G</td>
+<td>192G</td>
+</tr>
+<tr>
+<td>DeepSeek-V2.5-lQ4_XS</td>
+<td>117G</td>
+<td>10G</td>
+<td>107G</td>
+<td>128G</td>
+</tr>
+<tr>
+<td>Qwen2-57B-A14B-Instruct-q4_k_m</td>
+<td>33G</td>
+<td>8G</td>
+<td>34G</td>
+<td>64G</td>
+</tr>
+<tr>
+<td>DeepSeek-V2-Lite-q4_k_m</td>
+<td>9.7G</td>
+<td>3G</td>
+<td>13G</td>
+<td>16G</td>
+</tr>
+<tr>
+<td>Mixtral-8x7B-q4_k_m</td>
+<td>25G</td>
+<td>1.6G</td>
+<td>51G</td>
+<td>64G</td>
+</tr>
+<tr>
+<td>Mixtral-8x22B-q4_k_m</td>
+<td>80G</td>
+<td>4G</td>
+<td>86.1G</td>
+<td>96G</td>
+</tr>
+<tr>
+<td>InternLM2.5-7B-Chat-1M</td>
+<td>15.5G</td>
+<td>15.5G</td>
+<td>8G (32K context)</td>
+<td>150G (1M context)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>KT支持的量化形式</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Supported Formats✅</th>
+<th>Deprecated Formats❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q2_K_L</td>
+<td>1Q2_XXS</td>
+</tr>
+<tr>
+<td>Q2_K_XS</td>
+<td></td>
+</tr>
+<tr>
+<td>Q3_K_M</td>
+<td></td>
+</tr>
+<tr>
+<td>Q4_K_M</td>
+<td></td>
+</tr>
+<tr>
+<td>Q5_K_M</td>
+<td></td>
+</tr>
+<tr>
+<td>Q6_K</td>
+<td></td>
+</tr>
+<tr>
+<td>Q8_0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>KT支持的模型类型</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Supported Models✅</th>
+<th>Deprecated Models</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeepSeek-R1</td>
+<td>InternLM2.5-7B-Chat-1M❌</td>
+</tr>
+<tr>
+<td>DeepSeek-V3</td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSeek-V2</td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSeek-V2.5</td>
+<td></td>
+</tr>
+<tr>
+<td>Qwen2-57B</td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSeek-V2-Lite</td>
+<td></td>
+</tr>
+<tr>
+<td>MixtraI-8x7B</td>
+<td></td>
+</tr>
+<tr>
+<td>MixtraI-8x22B</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="14-ktransformers">1.4 KTransformers部署方法</h4>
+<p>​        KTransformers支持在Windows、Linux等操作系统下，使用源码部署或者docker工具进行部署。考虑到更为一般的企业级应用场景，本次实验采用Linux系统作为基础环境进行演示，并采用源码部署的方法进行部署。</p>
+<h3 id="2deepseek-r1">2.DeepSeek R1模型权重与配置文件下载</h3>
+<p>​        本次实验使用官方推荐的DeepSeek R1 UD-IQ1_S，直接使用Unsloth压制的模型即可，模型下载地址：</p>
+<ul>
+<li>
+<p>魔搭社区下载地址：https://www.modelscope.cn/models/unsloth/DeepSeek-R1-GGUF</p>
+</li>
+<li>
+<p>HuggingFace下载地址：https://huggingface.co/unsloth/DeepSeek-R1-GGUF</p>
+</li>
+</ul>
+<p>模型权重较大，总共约130G左右。若使用HuggingFace进行下载，则需要一些网络工具。</p>
+<p>这里推荐使用魔搭社区进行下载，流程如下：</p>
+<ul>
+<li><strong>【可选】</strong>借助screen持久化会话</li>
+<li>由于实际下载时间可能持续2个小时，因此最好使用screen开启持久化会话，避免因为关闭会话导致下载中断。</li>
+</ul>
+<pre><code class="language-Bash">screen -S kt
+</code></pre>
+<ul>
+<li>创建一个名为kt的会话。之后哪怕关闭了当前会话，也可以使用如下命令</li>
+</ul>
+<pre><code class="language-Bash">screen -r kt
+</code></pre>
+<blockquote>
+<p>-bash: screen: command not found解决方案： </p>
+<p><code>bash
+sudo apt install screen</code></p>
+</blockquote>
+<ul>
+<li>使用魔搭社区进行下载</li>
+<li>使用modelscope进行权重下载，需要先安装魔搭社区</li>
+</ul>
+<pre><code class="language-Bash">pip install modelscope
+</code></pre>
+<blockquote>
+<p>-bash: pip: command not found解决方案：</p>
+<p><code>bash
+sudo apt update
+sudo apt install python3-pip  # 安装 pip for Python3</code></p>
+<p>如pip下载速度过慢，请更换pip源，以阿里云源为例：</p>
+<p><code>bash
+mkdir -p ~/.pip
+echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\ntrusted-host = mirrors.aliyun.com" &gt; ~/.pip/pip.conf</code></p>
+<p>验证命令:（如果输出包含 <code>mirrors.aliyun.com</code>，说明配置成功！）</p>
+<p><code>bash
+pip3 config list</code></p>
+<h3 id="_1">其他镜像源（备用）</h3>
+<p>如果阿里云偶尔不稳定，可替换为以下镜像：</p>
+<ul>
+<li>清华源：<code>https://pypi.tuna.tsinghua.edu.cn/simple</code></li>
+<li>腾讯云：<code>https://mirrors.cloud.tencent.com/pypi/simple</code></li>
+<li>华为云：<code>https://repo.huaweicloud.com/repository/pypi/simple</code></li>
+</ul>
+</blockquote>
+<ul>
+<li>然后输入如下命令进行下载</li>
+</ul>
+<pre><code class="language-Bash">mkdir ./DeepSeek-R1-GGUF
+modelscope download --model unsloth/DeepSeek-R1-GGUF  --include '**UD-IQ1_S**'  --local_dir /root/DeepSeek-R1-GGUF
+</code></pre>
+<ul>
+<li>下载DeepSeek R1原版模型的配置文件</li>
+<li>此外，根据KTransformer的项目要求，还需要下载DeepSeek R1原版模型的除了模型权重文件外的其他配置文件，方便进行灵活的专家加载。因此我们还需要使用modelscope下载DeepSeek R1模型除了模型权重（.safetensor）外的其他全部文件，可以按照如下方式进行下载</li>
+</ul>
+<pre><code class="language-Bash">mkdir ./DeepSeek-R1
+modelscope download --model deepseek-ai/DeepSeek-R1  --exclude '*.safetensors'  --local_dir /root/DeepSeek-R1
+</code></pre>
+<ul>
+<li>这里最终我们是下载了DeepSeek UD-IQ1_S模型权重和DeepSeek R1的模型配置文件，并分别保存在两个文件夹中：</li>
+<li>DeepSeek R1 UD-IQ1_S模型权重地址：<strong>/root/DeepSeek-R1-GGUF/DeepSeek-R1-UD-IQ1_S</strong></li>
+<li>DeepSeek R1的模型配置文件地址：<strong>/root/DeepSeek-R1-Config</strong></li>
+</ul>
+<h2 id="ktransformerunsloth">三、KTransformer+Unsloth动态量化模型部署与调用流程</h2>
+<p>​        在准备好了DeepSeek-R1的模型权重和DeepSeek-R1模型配置文件之后，接下来开始着手部署KTransformer。该项目部署流程非常复杂，请务必每一步都顺利完成后，再执行下一步。在正式开始安装前，有以下几点需要事先声明：</p>
+<ul>
+<li>关于版本：目前KT开放了V2.0、V2.1和V3.0预览版。课程以目前兼容性最强的V2.0进行演示，并介绍V3.0部署方法。若CPU满足要求（有AMX功能），则可运行V3.0。</li>
+<li>V3.0版本需求：V3.0对软硬件环境要求较高，除了要求CPU支持AMX功能外，还要求Python 3.11以上及CUDA12.6。</li>
+<li><strong>注意！</strong>截止视频上线时，KTransformers官方库并未支持1.58bit动态量化模型，因此只能通过下载修改后的源码进行运行。</li>
+</ul>
+<h3 id="1">1. 安装基础依赖</h3>
+<ul>
+<li>【0】创建虚拟环境【可选】</li>
+</ul>
+<pre><code class="language-Bash">conda create --name kt python=3.11
+conda init
+source ~/.bashrc
+conda activate kt
+</code></pre>
+<blockquote>
+<p>-bash: conda: command not found解决方案：</p>
+<p><code>bash
+curl -o miniconda.sh https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh &amp;&amp; bash miniconda.sh -b -p ~/miniconda3 &amp;&amp; ~/miniconda3/bin/conda init bash &amp;&amp; source ~/.bashrc</code></p>
+<p>验证命令：</p>
+<p><code>bash
+conda --version</code></p>
+<p><details>
+<summary>Conda基础使用</summary>
+<pre>
+conda create --name myenv python=3.9         # 创建名为myenv环境并指定Python版本
+conda activate myenv                         # 激活 myenv 环境
+conda deactivate                             # 退出当前环境
+conda env list                               # 列出所有 Conda 环境
+conda remove --name myenv --all              # 删除 myenv 环境
+conda install numpy                          # 安装 numpy 包
+conda install numpy=1.21                     # 安装指定版本的 numpy 包
+conda install -c conda-forge pandas          # 从 conda-forge 渠道安装 pandas 包
+conda update numpy                           # 更新 numpy 包
+conda remove numpy                           # 卸载 numpy 包
+conda list                                   # 列出当前环境中已安装的包
+conda search numpy                           # 搜索 numpy 包
+conda env export &gt; environment.yml           # 导出当前环境到 environment.yml 文件
+conda env create -f environment.yml          # 从 environment.yml 文件创建环境
+conda config --show                          # 查看 Conda 配置
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/<br />
+                                           # 添加清华镜像源
+conda config --set show_channel_urls yes     # 设置安装包时显示渠道 URL
+conda config --remove-key channels           # 恢复默认配置
+conda update conda                           # 更新 Conda
+conda update --all                           # 更新当前环境中的所有包
+conda clean --all                            # 清理 Conda 缓存
+conda --version                              # 查看 Conda 版本
+conda --help                                 # 查看 Conda 帮助
+conda install --help                         # 查看 conda install 命令的帮助
+</pre>
+</details></p>
+</blockquote>
+<ul>
+<li>【1】然后需要安装<strong>gcc</strong>、<strong>g++</strong> 和 <strong>cmake</strong>等基础库：</li>
+</ul>
+<pre><code class="language-Bash">sudo apt-get update
+sudo apt-get install gcc g++ cmake ninja-build
+</code></pre>
+<blockquote>
+<p>验证命令：</p>
+<p><code>bash
+gcc --version &amp;&amp; g++ --version &amp;&amp; cmake --version &amp;&amp; ninja --version</code></p>
+<p>样例输出：</p>
+<p>```bash
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<p>g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<p>cmake version 3.22.1</p>
+<p>CMake suite maintained and supported by Kitware (kitware.com/cmake).
+1.10.1
+```</p>
+</blockquote>
+<ul>
+<li>【2】然后继续安装 <strong>PyTorch</strong>、<strong>packaging</strong>、<strong>ninja</strong>：</li>
+</ul>
+<pre><code class="language-Bash">pip install torch packaging ninja cpufeature numpy
+</code></pre>
+<blockquote>
+<p>验证命令：</p>
+<p><code>bash 
+python -c "import torch, packaging, ninja, cpufeature, numpy; print(f'torch: {torch.__version__}\npackaging: {packaging.__version__}\nninja: {ninja.__version__}\ncpufeature: {cpufeature.__version__}\nnumpy: {numpy.__version__}')"</code></p>
+<p>样例输出：</p>
+<p><code>bash
+torch: 2.6.0+cu124
+packaging: 24.2
+ninja: 1.11.1.3
+cpufeature: 0.2.1
+numpy: 2.2.3</code></p>
+</blockquote>
+<ul>
+<li>【3】接下来需要继续安装<code>flash-attn</code>：</li>
+</ul>
+<pre><code class="language-Bash">pip install flash-attn
+</code></pre>
+<blockquote>
+<p>如果报错，请尝试先运行以下命令：</p>
+<p>```bash
+nvcc --version #如果命令未找到，说明 CUDA 未正确安装或未配置环境变量。</p>
+<h1 id="cudaubuntu2204">安装CUDA参考命令，ubuntu2204系统下：</h1>
+<p>wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin &amp;&amp; sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600 &amp;&amp; wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda-repo-ubuntu2204-12-4-local_12.4.0-550.54.14-1_amd64.deb &amp;&amp; sudo dpkg -i cuda-repo-ubuntu2204-12-4-local_12.4.0-550.54.14-1_amd64.deb &amp;&amp; sudo cp /var/cuda-repo-ubuntu2204-12-4-local/cuda-*-keyring.gpg /usr/share/keyrings/ &amp;&amp; sudo apt-get update &amp;&amp; sudo apt-get -y install cuda &amp;&amp; echo 'export PATH=/usr/local/cuda/bin:$PATH' &gt;&gt; ~/.bashrc &amp;&amp; echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc &amp;&amp; nvcc --version</p>
+<h1 id="pytorchubuntu2204">安装pytorch，ubuntu2204系统下：</h1>
+<p>pip install torch torchvision torchaudio --index-url https://mirrors.aliyun.com/pypi/simple
+```</p>
+<p>验证命令：</p>
+<p><code>bash 
+python -c "import flash_attn; print(f'flash-attn version: {flash_attn.__version__}')"</code></p>
+<p>样例输出：</p>
+<p><code>bash
+flash-attn version: 1.0.0</code></p>
+</blockquote>
+<ul>
+<li>【4】需要手动安装<code>libstdc</code>：</li>
+</ul>
+<pre><code class="language-Bash">sudo apt-get install --only-upgrade libstdc++6
+conda install -c conda-forge libstdcxx-ng
+</code></pre>
+<blockquote>
+<p>验证命令：</p>
+<p><code>bash 
+strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX_ &amp;&amp; strings $CONDA_PREFIX/lib/libstdc++.so.6 | grep GLIBCXX_</code></p>
+<p>样例输出：</p>
+<p><code>bash
+GLIBCXX_3.4.11
+GLIBCXX_3.4.22
+GLIBCXX_3.4.29
+...
+GLIBCXX_3.4.11
+GLIBCXX_3.4.22
+GLIBCXX_3.4.29</code></p>
+</blockquote>
+<ul>
+<li>【5】安装conda-libmamba-solver：</li>
+</ul>
+<pre><code class="language-Bash">conda install -c conda-forge conda-libmamba-solver
+</code></pre>
+<blockquote>
+<p>验证命令：</p>
+<p><code>bash 
+conda list conda-libmamba-solver | grep conda-libmamba-solver</code></p>
+<p>样例输出：</p>
+<p><code>bash
+libmamba-solver
+conda-libmamba-solver     25.1.1             pyhd3eb1b0_0</code></p>
+</blockquote>
+<h3 id="2-ktransformers">2. 安装KTransformers</h3>
+<p>将下载好的压缩包<strong><code>ktransformers_offline.tar</code></strong>上传至服务器指定路径<code>/root/autodl-tmp</code>，</p>
+<p>然后使用如下命令进行解压缩：</p>
+<pre><code class="language-Bash">tar -xzvf ktransformers_offline.tar.gz
+cd ktransformers
+</code></pre>
+<p>该压缩包已包含相关依赖第三方项目，如llama.cpp等。</p>
+<p>接下要需要确认当前CPU的类型，如果是双槽版本64核CPU，则需要使用如下命令设置NUMA=1：</p>
+<pre><code class="language-Bash">export USE_NUMA=1
+</code></pre>
+<blockquote>
+<p>只需要在项目编译的时候输入一次即可。</p>
+</blockquote>
+<p>例如，假设当前的服务器CPU为：64 vCPU Intel(R) Xeon(R) Gold 6430</p>
+<p>代表的就是64核双槽CPU，这种CPU往往出现在服务器使用场景中。</p>
+<p>因此这里需要先输入<code>export USE_NUMA=1</code>，然后再执行后续命令。而这里如果不是64核双槽CPU，则无需执行这个命令。而若是64核双槽CPU，但未执行<code>export USE_NUMA=1</code>就执行了后续命令，则需要再次输入<code>export USE_NUMA=1</code>，然后再次运行后面的命令。</p>
+<blockquote>
+<p>通过设置 <code>USE_NUMA=1</code>，你是在为系统和应用程序启用针对多CPU、多核架构的NUMA优化。这有助于提升在多处理器系统中的性能，特别是在处理并行计算和大规模数据时。</p>
+</blockquote>
+<p>而如果是单槽CPU，则不用设置<code>USE_NUMA=1</code>。</p>
+<p>确认后即可进行编译和安装：</p>
+<pre><code class="language-Bash">sh ./install.sh
+</code></pre>
+<p>一切安装完成后，即可输入如下命令查看当前安装情况</p>
+<pre><code class="language-Bash">pip show ktransformers
+</code></pre>
+<h3 id="3ktransformer">3.运行KTransformer</h3>
+<p>​        部署完成后，即可尝试调用KTransformer进行对话。这里可以采用官方提供的最简单的对话脚本<code>local_chat.py</code>进行对话：</p>
+<p>在项目根目录下输入如下命令：</p>
+<pre><code class="language-Bash">python /root/ktransformers/ktransformers/local_chat.py \
+--model_path /root/DeepSeek-R1 \
+--gguf_path /root/DeepSeek-R1-GGUF \
+--max_new_tokens 2048 \
+--force_think true
+</code></pre>
+<p>参数解释如下：</p>
+<ul>
+<li><code>&lt;你的模型路径&gt;</code> 可以是本地路径，也可以是来自 Hugging Face 的在线路径（如 <code>deepseek-ai/DeepSeek-V3</code>）。如果在线出现连接问题，尝试使用镜像站点（如 <code>hf-mirror.com</code>）。</li>
+<li><code>&lt;你的GGUF路径&gt;</code> 也可以是在线路径，但由于文件较大，建议下载并量化模型以满足需求（注意，这是目录路径）。</li>
+<li><code>--max_new_tokens 2048</code> 是最大输出token长度。如果发现答案被截断，可以增加该值以获得更长的答案（但请注意，增大会导致OOM问题，并且可能减慢生成速度）。</li>
+<li><code>--force_think true</code>。打印R1模型的思考过程。</li>
+</ul>
+<h3 id="4">4.实际运行效果展示</h3>
+<p>实际内存使用：</p>
+<ul>
+<li>启动过程</li>
+<li>需要完整加载61层模型权重</li>
+<li>开启对话</li>
+<li>稍等片刻即可开启命令行对话</li>
+<li>响应速度:</li>
+<li><strong>提示阶段（prompt eval）</strong>：模型处理了 12 个 token，耗时 1.4 秒，处理速率为 8 个 token 每秒。</li>
+<li><strong>评估阶段（eval eval）</strong>：模型处理了 277 个 token，耗时 54 秒，处理速率为 5 个 token 每秒。</li>
+<li>显存占用</li>
+<li>仅占用不到14G显存。</li>
+<li>实际内存使用约60G：</li>
+</ul>
+<h2 id="apiopen-webui">四、创建API与接入Open-WebUI</h2>
+<h3 id="1api">1.开启API服务</h3>
+<p>目前安装包已修复server API的若干Bug，已经可以正常使用。</p>
+<p>然后使用如下命令即可创建API服务，其中端口号可以根据实际情况自行设置：</p>
+<pre><code class="language-Bash">ktransformers --model_path /root/autodl-tmp/DeepSeek-R1 --gguf_path /root/autodl-tmp/DeepSeek-R1-GGUF/DeepSeek-R1-UD-IQ1_S  --port 10002
+</code></pre>
+<p>稍等片刻等待启动完成即可。</p>
+<h3 id="2-api">2. API调用流程</h3>
+<ul>
+<li>命令行调用</li>
+</ul>
+<p>启动完成后，可以使用如下命令测试能否顺利连接：</p>
+<pre><code class="language-Bash">curl -X POST \
+  'http://localhost:10002/v1/chat/completions' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;你好呀。&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;model&quot;: &quot;DeepSeek-R1&quot;,
+    &quot;stream&quot;: false
+  }'
+</code></pre>
+<ul>
+<li>Jupyter中使用OpenAI风格调用</li>
+<li>需要提前安装openai库：</li>
+</ul>
+<pre><code class="language-Bash">pip install openai
+</code></pre>
+<p>然后在Jupyter中测试使用：</p>
+<pre><code class="language-Python">from openai import OpenAI
+
+ds_api_key = &quot;none&quot;
+
+# 实例化客户端
+client = OpenAI(api_key=ds_api_key, 
+                base_url=&quot;http://localhost:10002/v1&quot;)
+
+# 调用 deepseek 模型
+response = client.chat.completions.create(
+    model=&quot;Deepseek-R1&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;你好，好久不见!请介绍下你自己。&quot;}
+    ]
+)
+
+response
+</code></pre>
+<p>然后可以通过如下方式提取出思考链内容：</p>
+<pre><code class="language-Python">import re
+
+# 原始文本
+text = response.choices[0].message.content
+
+# 使用正则表达式提取&lt;think&gt;和&lt;/think&gt;之间的内容
+think_content = re.search(r'&lt;think&gt;(.*?)&lt;/think&gt;', text, re.DOTALL)
+
+# 提取到的内容
+think_content_text = think_content.group(1) if think_content else None
+think_content_text
+</code></pre>
+<h3 id="3-apiopen-webui">3. 将API接入Open-WebUI</h3>
+<ul>
+<li>本地部署Open-WebUI</li>
+</ul>
+<p>首先需要安装Open-WebUI，官网地址如下：https://github.com/open-webui/open-webui。</p>
+<p>我们可以直接使用pip命令快速完成安装：</p>
+<pre><code class="language-Bash">pip install open-webui
+</code></pre>
+<ul>
+<li>开启Open-WebUI服务</li>
+</ul>
+<p>然后需要设置离线环境，避免Open-WebUI启动时自动进行模型下载：</p>
+<pre><code class="language-Bash">export HF_HUB_OFFLINE=1
+</code></pre>
+<p>然后启动Open-WebUI</p>
+<pre><code class="language-Bash">open-webui serve
+</code></pre>
+<p>需要注意的是，如果启动的时候仍然报错显示无法下载模型，是Open-WebUI试图从huggingface上下载embedding模型，之后我们会手动将其切换为本地运行的Embedding模型。</p>
+<p>然后在本地浏览器输入地址:8080端口即可访问：</p>
+<ul>
+<li>连接本地模型API</li>
+</ul>
+<p>此时后台没有检测到任何模型，需要我们手动创建和本地的API连接，才能顺利调用本地模型。这里点击左下角设置—&gt;函数—&gt;加号。写入如下脚本代码：</p>
+<pre><code class="language-Python">import json
+import httpx
+import re
+from typing import AsyncGenerator, Callable, Awaitable
+from pydantic import BaseModel, Field
+import asyncio
+import traceback
+
+
+class Pipe:
+    class Valves(BaseModel):
+        DEEPSEEK_API_BASE_URL: str = Field(
+            default=&quot;https://api.deepseek.com/v1&quot;,
+            description=&quot;DeepSeek API的基础请求地址&quot;,
+        )
+        DEEPSEEK_API_KEY: str = Field(
+            default=&quot;&quot;, description=&quot;用于身份验证的DeepSeek API密钥，可从控制台获取&quot;
+        )
+        DEEPSEEK_API_MODEL: str = Field(
+            default=&quot;deepseek-reasoner&quot;,
+            description=&quot;API请求的模型名称，默认为 deepseek-reasoner，多模型名可使用`,`分隔&quot;,
+        )
+
+    def __init__(self):
+        self.valves = self.Valves()
+        self.data_prefix = &quot;data:&quot;
+        self.emitter = None
+
+    def pipes(self):
+        models = self.valves.DEEPSEEK_API_MODEL.split(&quot;,&quot;)
+        return [
+            {
+                &quot;id&quot;: model.strip(),
+                &quot;name&quot;: model.strip(),
+            }
+            for model in models
+        ]
+
+    async def pipe(
+        self, body: dict, __event_emitter__: Callable[[dict], Awaitable[None]] = None
+    ) -&gt; AsyncGenerator[str, None]:
+        &quot;&quot;&quot;主处理管道（已移除缓冲）&quot;&quot;&quot;
+        thinking_state = {&quot;thinking&quot;: -1}  # 用于存储thinking状态
+        self.emitter = __event_emitter__
+        # 用于存储联网模式下返回的参考资料列表
+        stored_references = []
+
+        # 联网搜索供应商 0-无 1-火山引擎 2-PPLX引擎 3-硅基流动
+        search_providers = 0
+        waiting_for_reference = False
+
+        # 用于处理硅基的 [citation:1] 的栈
+        citation_stack_reference = [
+            &quot;[&quot;,
+            &quot;c&quot;,
+            &quot;i&quot;,
+            &quot;t&quot;,
+            &quot;a&quot;,
+            &quot;t&quot;,
+            &quot;i&quot;,
+            &quot;o&quot;,
+            &quot;n&quot;,
+            &quot;:&quot;,
+            &quot;&quot;,
+            &quot;]&quot;,
+        ]
+        citation_stack = []
+        # 临时保存的未处理的字符串
+        unprocessed_content = &quot;&quot;
+
+        # 验证配置
+        if not self.valves.DEEPSEEK_API_KEY:
+            yield json.dumps({&quot;error&quot;: &quot;未配置API密钥&quot;}, ensure_ascii=False)
+            return
+        # 准备请求参数
+        headers = {
+            &quot;Authorization&quot;: f&quot;Bearer {self.valves.DEEPSEEK_API_KEY}&quot;,
+            &quot;Content-Type&quot;: &quot;application/json&quot;,
+        }
+        try:
+            # 模型ID提取
+            model_id = body[&quot;model&quot;].split(&quot;.&quot;, 1)[-1]
+            payload = {**body, &quot;model&quot;: model_id}
+            # 处理消息以防止连续的相同角色
+            messages = payload[&quot;messages&quot;]
+            i = 0
+            while i &lt; len(messages) - 1:
+                if messages[i][&quot;role&quot;] == messages[i + 1][&quot;role&quot;]:
+                    # 插入具有替代角色的占位符消息
+                    alternate_role = (
+                        &quot;assistant&quot; if messages[i][&quot;role&quot;] == &quot;user&quot; else &quot;user&quot;
+                    )
+                    messages.insert(
+                        i + 1,
+                        {&quot;role&quot;: alternate_role, &quot;content&quot;: &quot;[Unfinished thinking]&quot;},
+                    )
+                i += 1
+
+            # 发起API请求
+            async with httpx.AsyncClient(http2=True) as client:
+                async with client.stream(
+                    &quot;POST&quot;,
+                    f&quot;{self.valves.DEEPSEEK_API_BASE_URL}/chat/completions&quot;,
+                    json=payload,
+                    headers=headers,
+                    timeout=300,
+                ) as response:
+
+                    # 错误处理
+                    if response.status_code != 200:
+                        error = await response.aread()
+                        yield self._format_error(response.status_code, error)
+                        return
+
+                    # 流式处理响应
+                    async for line in response.aiter_lines():
+                        if not line.startswith(self.data_prefix):
+                            continue
+
+                        # 截取 JSON 字符串
+                        json_str = line[len(self.data_prefix) :].strip()
+
+                        # 去除首尾空格后检查是否为结束标记
+                        if json_str == &quot;[DONE]&quot;:
+                            return
+                        try:
+                            data = json.loads(json_str)
+                        except json.JSONDecodeError as e:
+                            error_detail = f&quot;解析失败 - 内容：{json_str}，原因：{e}&quot;
+                            yield self._format_error(&quot;JSONDecodeError&quot;, error_detail)
+                            return
+
+                        if search_providers == 0:
+                            # 检查 delta 中的搜索结果
+                            choices = data.get(&quot;choices&quot;)
+                            if not choices or len(choices) == 0:
+                                continue  # 跳过没有 choices 的数据块
+                            delta = choices[0].get(&quot;delta&quot;, {})
+                            if delta.get(&quot;type&quot;) == &quot;search_result&quot;:
+                                search_results = delta.get(&quot;search_results&quot;, [])
+                                if search_results:
+                                    ref_count = len(search_results)
+                                    yield '&lt;details type=&quot;search&quot;&gt;\n'
+                                    yield f&quot;&lt;summary&gt;已搜索 {ref_count} 个网站&lt;/summary&gt;\n&quot;
+                                    for idx, result in enumerate(search_results, 1):
+                                        yield f'&gt; {idx}. [{result[&quot;title&quot;]}]({result[&quot;url&quot;]})\n'
+                                    yield &quot;&lt;/details&gt;\n&quot;
+                                    search_providers = 3
+                                    stored_references = search_results
+                                    continue
+
+                            # 处理参考资料
+                            stored_references = data.get(&quot;references&quot;, []) + data.get(
+                                &quot;citations&quot;, []
+                            )
+                            if stored_references:
+                                ref_count = len(stored_references)
+                                yield '&lt;details type=&quot;search&quot;&gt;\n'
+                                yield f&quot;&lt;summary&gt;已搜索 {ref_count} 个网站&lt;/summary&gt;\n&quot;
+                            # 如果data中有references，则说明是火山引擎的返回结果
+                            if data.get(&quot;references&quot;):
+                                for idx, reference in enumerate(stored_references, 1):
+                                    yield f'&gt; {idx}. [{reference[&quot;title&quot;]}]({reference[&quot;url&quot;]})\n'
+                                yield &quot;&lt;/details&gt;\n&quot;
+                                search_providers = 1
+                            # 如果data中有citations，则说明是PPLX引擎的返回结果
+                            elif data.get(&quot;citations&quot;):
+                                for idx, reference in enumerate(stored_references, 1):
+                                    yield f&quot;&gt; {idx}. {reference}\n&quot;
+                                yield &quot;&lt;/details&gt;\n&quot;
+                                search_providers = 2
+
+                        # 方案 A: 检查 choices 是否存在且非空
+                        choices = data.get(&quot;choices&quot;)
+                        if not choices or len(choices) == 0:
+                            continue  # 跳过没有 choices 的数据块
+                        choice = choices[0]
+
+                        # 结束条件判断
+                        if choice.get(&quot;finish_reason&quot;):
+                            return
+
+                        # 状态机处理
+                        state_output = await self._update_thinking_state(
+                            choice.get(&quot;delta&quot;, {}), thinking_state
+                        )
+                        if state_output:
+                            yield state_output
+                            if state_output == &quot;&lt;think&gt;&quot;:
+                                yield &quot;\n&quot;
+
+                        # 处理并立即发送内容
+                        content = self._process_content(choice[&quot;delta&quot;])
+                        if content:
+                            # 处理思考状态标记
+                            if content.startswith(&quot;&lt;think&gt;&quot;):
+                                content = re.sub(r&quot;^&lt;think&gt;&quot;, &quot;&quot;, content)
+                                yield &quot;&lt;think&gt;&quot;
+                                await asyncio.sleep(0.1)
+                                yield &quot;\n&quot;
+                            elif content.startswith(&quot;&lt;/think&gt;&quot;):
+                                content = re.sub(r&quot;^&lt;/think&gt;&quot;, &quot;&quot;, content)
+                                yield &quot;&lt;/think&gt;&quot;
+                                await asyncio.sleep(0.1)
+                                yield &quot;\n&quot;
+
+                            # 处理参考资料
+                            if search_providers == 1:
+                                # 火山引擎的参考资料处理
+                                # 如果文本中包含&quot;摘要&quot;，设置等待标志
+                                if &quot;摘要&quot; in content:
+                                    waiting_for_reference = True
+                                    yield content
+                                    continue
+
+                                # 如果正在等待参考资料的数字
+                                if waiting_for_reference:
+                                    # 如果内容仅包含数字或&quot;、&quot;
+                                    if re.match(r&quot;^(\d+|、)$&quot;, content.strip()):
+                                        numbers = re.findall(r&quot;\d+&quot;, content)
+                                        if numbers:
+                                            num = numbers[0]
+                                            ref_index = int(num) - 1
+                                            if 0 &lt;= ref_index &lt; len(stored_references):
+                                                ref_url = stored_references[ref_index][
+                                                    &quot;url&quot;
+                                                ]
+                                            else:
+                                                ref_url = &quot;&quot;
+                                            content = f&quot;[[{num}]]({ref_url})&quot;
+                                        # 保持等待状态继续处理后续数字
+                                    # 如果遇到非数字且非&quot;、&quot;的内容且不含&quot;摘要&quot;，停止等待
+                                    elif not &quot;摘要&quot; in content:
+                                        waiting_for_reference = False
+                            elif search_providers == 2:
+                                # PPLX引擎的参考资料处理
+                                def replace_ref(m):
+                                    idx = int(m.group(1)) - 1
+                                    if 0 &lt;= idx &lt; len(stored_references):
+                                        return f&quot;[[{m.group(1)}]]({stored_references[idx]})&quot;
+                                    return f&quot;[[{m.group(1)}]]()&quot;
+
+                                content = re.sub(r&quot;\[(\d+)\]&quot;, replace_ref, content)
+                            elif search_providers == 3:
+                                skip_outer = False
+
+                                if len(unprocessed_content) &gt; 0:
+                                    content = unprocessed_content + content
+                                    unprocessed_content = &quot;&quot;
+
+                                for i in range(len(content)):
+                                    # 检查 content[i] 是否可访问
+                                    if i &gt;= len(content):
+                                        break
+                                    # 检查 citation_stack_reference[len(citation_stack)] 是否可访问
+                                    if len(citation_stack) &gt;= len(
+                                        citation_stack_reference
+                                    ):
+                                        break
+                                    if (
+                                        content[i]
+                                        == citation_stack_reference[len(citation_stack)]
+                                    ):
+                                        citation_stack.append(content[i])
+                                        # 如果 citation_stack 的位数等于 citation_stack_reference 的位数，则修改为 URL 格式返回
+                                        if len(citation_stack) == len(
+                                            citation_stack_reference
+                                        ):
+                                            # 检查 citation_stack[10] 是否可访问
+                                            if len(citation_stack) &gt; 10:
+                                                ref_index = int(citation_stack[10]) - 1
+                                                # 检查 stored_references[ref_index] 是否可访问
+                                                if (
+                                                    0
+                                                    &lt;= ref_index
+                                                    &lt; len(stored_references)
+                                                ):
+                                                    ref_url = stored_references[
+                                                        ref_index
+                                                    ][&quot;url&quot;]
+                                                else:
+                                                    ref_url = &quot;&quot;
+
+                                                # 将content中剩余的部分保存到unprocessed_content中
+                                                unprocessed_content = &quot;&quot;.join(
+                                                    content[i + 1 :]
+                                                )
+
+                                                content = f&quot;[[{citation_stack[10]}]]({ref_url})&quot;
+                                                citation_stack = []
+                                                skip_outer = False
+                                                break
+                                        else:
+                                            skip_outer = True
+                                    elif (
+                                        citation_stack_reference[len(citation_stack)]
+                                        == &quot;&quot;
+                                    ):
+                                        # 判断是否为数字
+                                        if content[i].isdigit():
+                                            citation_stack.append(content[i])
+                                            skip_outer = True
+                                        else:
+                                            # 将 citation_stack 中全部元素拼接成字符串
+                                            content = &quot;&quot;.join(citation_stack) + content
+                                            citation_stack = []
+                                    elif (
+                                        citation_stack_reference[len(citation_stack)]
+                                        == &quot;]&quot;
+                                    ):
+                                        # 判断前一位是否为数字
+                                        if citation_stack[-1].isdigit():
+                                            citation_stack[-1] += content[i]
+                                            skip_outer = True
+                                        else:
+                                            content = &quot;&quot;.join(citation_stack) + content
+                                            citation_stack = []
+                                    else:
+                                        if len(citation_stack) &gt; 0:
+                                            # 将 citation_stack 中全部元素拼接成字符串
+                                            content = &quot;&quot;.join(citation_stack) + content
+                                            citation_stack = []
+
+                                if skip_outer:
+                                    continue
+
+                            yield content
+        except Exception as e:
+            yield self._format_exception(e)
+
+    async def _update_thinking_state(self, delta: dict, thinking_state: dict) -&gt; str:
+        &quot;&quot;&quot;更新思考状态机（简化版）&quot;&quot;&quot;
+        state_output = &quot;&quot;
+        if thinking_state[&quot;thinking&quot;] == -1 and delta.get(&quot;reasoning_content&quot;):
+            thinking_state[&quot;thinking&quot;] = 0
+            state_output = &quot;&lt;think&gt;&quot;
+        elif (
+            thinking_state[&quot;thinking&quot;] == 0
+            and not delta.get(&quot;reasoning_content&quot;)
+            and delta.get(&quot;content&quot;)
+        ):
+            thinking_state[&quot;thinking&quot;] = 1
+            state_output = &quot;\n&lt;/think&gt;\n\n&quot;
+        return state_output
+
+    def _process_content(self, delta: dict) -&gt; str:
+        &quot;&quot;&quot;直接返回处理后的内容&quot;&quot;&quot;
+        return delta.get(&quot;reasoning_content&quot;, &quot;&quot;) or delta.get(&quot;content&quot;, &quot;&quot;)
+
+    def _emit_status(self, description: str, done: bool = False) -&gt; Awaitable[None]:
+        &quot;&quot;&quot;发送状态更新&quot;&quot;&quot;
+        if self.emitter:
+            return self.emitter(
+                {
+                    &quot;type&quot;: &quot;status&quot;,
+                    &quot;data&quot;: {
+                        &quot;description&quot;: description,
+                        &quot;done&quot;: done,
+                    },
+                }
+            )
+        return None
+
+    def _format_error(self, status_code: int, error: bytes) -&gt; str:
+        if isinstance(error, str):
+            error_str = error
+        else:
+            error_str = error.decode(errors=&quot;ignore&quot;)
+        try:
+            err_msg = json.loads(error_str).get(&quot;message&quot;, error_str)[:200]
+        except Exception:
+            err_msg = error_str[:200]
+        return json.dumps(
+            {&quot;error&quot;: f&quot;HTTP {status_code}: {err_msg}&quot;}, ensure_ascii=False
+        )
+
+    def _format_exception(self, e: Exception) -&gt; str:
+        tb_lines = traceback.format_exception(type(e), e, e.__traceback__)
+        detailed_error = &quot;&quot;.join(tb_lines)
+        return json.dumps({&quot;error&quot;: detailed_error}, ensure_ascii=False)
+</code></pre>
+<p>然后点击开启，并点击齿轮进行设置。</p>
+<p>设置本地端口、API Key和模型名称：</p>
+<ul>
+<li>开启对话</li>
+</ul>
+<p>点击保存，回到对话页面，则能看到本地运行的DeepSeek-R1模型</p>
+<p>至此，我们就完成了Ktransformers+Unsloth方案联合部署的全流程。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,687 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jiaweno.github.io/other/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9C%80%E8%A6%81GPU%EF%BC%9F.html">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>为什么大模型需要GPU？ - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../index.html" title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              为什么大模型需要GPU？
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    1.大模型基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            1.大模型基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅前言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅大模型专业术语解释
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 算数题太多，需要人海战术
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 大模型的「数学题」天生适合 GPU
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 显存：GPU 自带「超大草稿纸」
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 训练模型：GPU 是「超级教练」
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 现实中的对比
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么不用其他硬件？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-cuda-ai-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 先发优势：CUDA 生态就是 AI 界的 iOS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 软件武器库：送你开箱即用的「军火库」
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 硬件黑科技：专门为 AI 定制的「超能力」
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 行业「绑架」现象：从实验室到云计算的垄断
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-nvidia" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 现实案例：不用 NVIDIA 有多痛苦
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 替代方案的真实性价比
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么苹果 M 系列芯片也不行？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结：这不是技术问题，是生态战争
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>为什么大模型需要GPU？</h1>
+
+<p>用 GPU 跑大模型就像让一万个小学生同时做口算题，而 CPU 只能让一个数学教授慢慢解题——虽然教授很聪明，但架不住题目量实在太大。下面我用最直白的方式解释：</p>
+<hr />
+<h3 id="1"><strong>1. 算数题太多，需要人海战术</strong></h3>
+<ul>
+<li><strong>大模型的计算本质</strong>：想象你突然要算 <strong>1亿道加减乘除题</strong>，比如：</li>
+<li><code>(0.3×0.7) + (0.1×0.9) + ...</code>（这样的式子重复1亿次）</li>
+<li><strong>CPU 的做法</strong>：找一个数学博士（单核），用最聪明的方法（高主频+复杂指令）一道一道算。</li>
+<li><strong>GPU 的做法</strong>：找1万个小学三年级学生（上万个简单计算单元），每人分到1万道题，同时开算。</li>
+</ul>
+<p><strong>结果</strong>：哪怕每个小学生算得慢，但人多力量大，GPU 算完1亿题的时间可能是 CPU 的 <strong>100倍以上</strong>。</p>
+<hr />
+<h3 id="2-gpu"><strong>2. 大模型的「数学题」天生适合 GPU</strong></h3>
+<ul>
+<li><strong>核心操作</strong>：大模型90%的计算是 <strong>矩阵乘法</strong>（比如 <code>[1,2,3] × [4,5,6]^T</code>）</li>
+<li>这类计算不需要复杂逻辑，但需要 <strong>同时处理海量数据</strong>。</li>
+<li><strong>GPU 的强项</strong>：就像工厂流水线，专门为这类简单但重复的任务优化：</li>
+<li>比如 NVIDIA A100 显卡有 <strong>6912个计算核心</strong>，能同时处理上万组数据。</li>
+<li><strong>CPU 的弱点</strong>：虽然单核性能强（主频高），但一般只有 <strong>8-32个核心</strong>，面对大模型就像用勺子舀干游泳池。</li>
+</ul>
+<hr />
+<h3 id="3-gpu"><strong>3. 显存：GPU 自带「超大草稿纸」</strong></h3>
+<ul>
+<li><strong>大模型有多大</strong>：比如 GPT-3 有 <strong>1750亿个参数</strong>，加载到内存就像把整个图书馆的书摊开在桌子上。</li>
+<li><strong>GPU 显存</strong>：专用高速内存（如 24GB RTX 4090），带宽是 CPU 内存的 <strong>5-10倍</strong>。</li>
+<li>相当于给每个小学生发一本练习册（显存），直接在上面写答案。</li>
+<li><strong>CPU 内存</strong>：虽然容量可能更大（如 128GB），但数据传输速度慢，就像让教授跑回书架上取书再计算。</li>
+</ul>
+<hr />
+<h3 id="4-gpu"><strong>4. 训练模型：GPU 是「超级教练」</strong></h3>
+<ul>
+<li><strong>训练的本质</strong>：让模型从错误中学习，需要反复调整 <strong>每个参数</strong>。</li>
+<li>比如训练 ChatGPT 要调整 <strong>上千亿次参数</strong>，每次调整都涉及海量计算。</li>
+<li><strong>GPU 的加速效果</strong>：用1000个学生同时调整不同参数，训练时间从 <strong>1年缩短到1个月</strong>。</li>
+<li><strong>CPU 的困境</strong>：用教授自己调参数，可能还没调完模型就过时了。</li>
+</ul>
+<hr />
+<h3 id="5"><strong>5. 现实中的对比</strong></h3>
+<ul>
+<li><strong>用 CPU 跑 GPT-3</strong>：</li>
+<li>生成一句话可能要 <strong>10分钟</strong>（实测值），像用算盘算导弹轨道。</li>
+<li><strong>用 GPU 跑 GPT-3</strong>：</li>
+<li>同样任务只需 <strong>1秒</strong>，还能同时处理几十个用户的请求。</li>
+</ul>
+<hr />
+<h3 id="_1"><strong>为什么不用其他硬件？</strong></h3>
+<ul>
+<li><strong>TPU（谷歌专用芯片）</strong>：类似加强版 GPU，但价格贵且普通人难获取。</li>
+<li><strong>手机芯片</strong>：算力不足，运行7B模型就像让幼儿园小朋友算微积分。</li>
+<li><strong>量子计算机</strong>：还在实验室阶段，目前对大模型无用。</li>
+</ul>
+<hr />
+<h3 id="_2"><strong>总结</strong></h3>
+<p>用 GPU 跑大模型的本质是：<br />
+<strong>用简单计算单元的「人海战术」碾压复杂任务</strong>。就像打仗时，10个武林高手（CPU）打不过10万民兵（GPU）—— 因为对方人数比你多一万倍，而且专门练过列阵冲锋（并行计算优化）。 </p>
+<p>用 NVIDIA 显卡玩大模型，就像用 iPhone 拍短视频——硬件强只是基础，真正的核心是背后一整套「苹果生态」。下面用最直白的方式解释：</p>
+<hr />
+<h3 id="1-cuda-ai-ios"><strong>1. 先发优势：CUDA 生态就是 AI 界的 iOS</strong></h3>
+<ul>
+<li><strong>2006 年的关键决策</strong>：当其他显卡还在专注游戏画面时，NVIDIA 偷偷做了个「未来武器」——CUDA 并行计算架构。</li>
+<li><strong>现实效果</strong>：</li>
+<li>现在 90% 的 AI 框架（PyTorch/TensorFlow）底层都是 CUDA 代码</li>
+<li>就像微信只给 iOS/安卓开发APP，不给塞班系统做适配</li>
+</ul>
+<hr />
+<h3 id="2"><strong>2. 软件武器库：送你开箱即用的「军火库」</strong></h3>
+<p>NVIDIA 给开发者准备了一套「作弊工具包」：
+- <strong>cuDNN</strong>：深度学习的「数学公式速查手册」，让矩阵计算快 3-5 倍
+- <strong>TensorRT</strong>：模型推理加速器，能把 ChatGPT 的回复速度提升到「秒回」级别
+- <strong>NCCL</strong>（发音 nickle）：多卡通信神器，8 块显卡传输数据比顺丰同城还快</p>
+<p><strong>对比</strong>：AMD 的 ROCm 生态就像手动挡汽车，需要自己拧螺丝调参数</p>
+<hr />
+<h3 id="3-ai"><strong>3. 硬件黑科技：专门为 AI 定制的「超能力」</strong></h3>
+<ul>
+<li><strong>Tensor Core</strong>：专门处理矩阵乘法的「计算器官」</li>
+<li>比如 A100 显卡的 Tensor Core 每秒能算 <strong>312 万亿次</strong> FP16 运算</li>
+<li>对比：AMD 显卡的通用计算单元就像用瑞士军刀切牛排</li>
+<li><strong>显存黑科技</strong>：</li>
+<li>HBM 显存（像 A100 的 80GB HBM2e）带宽高达 <strong>2TB/s</strong></li>
+<li>相当于每秒传输 40 部 4K 电影</li>
+</ul>
+<hr />
+<h3 id="4"><strong>4. 行业「绑架」现象：从实验室到云计算的垄断</strong></h3>
+<ul>
+<li><strong>学术界</strong>：2012 年 AlexNet 用 GTX 580 引爆 AI 革命，从此论文实验全用 NVIDIA</li>
+<li><strong>云计算</strong>：AWS/Azure 的 AI 实例 90% 是 NVIDIA 显卡</li>
+<li><strong>恶性循环</strong>：学生用 NVIDIA 显卡做实验 → 教授要求实验室买 NVIDIA → 企业招聘要求 NVIDIA 经验</li>
+</ul>
+<hr />
+<h3 id="5-nvidia"><strong>5. 现实案例：不用 NVIDIA 有多痛苦</strong></h3>
+<ul>
+<li><strong>AMD 显卡的尴尬</strong>：</li>
+<li>安装 PyTorch 要自己编译 2 小时，CUDA 版只需 <code>pip install</code> 一行命令</li>
+<li>某国产大模型用 AMD 显卡训练，损失函数波动比过山车还刺激</li>
+<li><strong>国产显卡的困境</strong>：</li>
+<li>某互联网大厂尝试用国产卡跑 ChatGPT，吞吐量直接腰斩</li>
+<li>程序员需要重写 30% 的 CUDA 代码，相当于把英语论文翻译成克林贡语</li>
+</ul>
+<hr />
+<h3 id="6"><strong>6. 替代方案的真实性价比</strong></h3>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>价格优势</th>
+<th>易用性</th>
+<th>性能损耗</th>
+<th>生态支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NVIDIA 显卡</td>
+<td>❌</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>-</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>AMD 显卡+ROCm</td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>20%-40%</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>国产显卡+自研框架</td>
+<td>⭐⭐⭐</td>
+<td>⭐</td>
+<td>50%+</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>用 CPU 硬刚</td>
+<td>❌</td>
+<td>⭐</td>
+<td>90%+</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="m"><strong>为什么苹果 M 系列芯片也不行？</strong></h3>
+<ul>
+<li>M2 Ultra 的 GPU 理论算力接近 RTX 4090，但：</li>
+<li>没有 Tensor Core 这类专用单元</li>
+<li>Metal API 的生态支持约等于 CUDA 的 1/10</li>
+<li>实测 Stable Diffusion 出图速度比 4090 慢 3 倍</li>
+</ul>
+<hr />
+<h3 id="_3"><strong>总结：这不是技术问题，是生态战争</strong></h3>
+<p>用 NVIDIA 玩大模型就像在微信群里做生意——你可以抱怨平台抽成太高，但离开这个生态连客户都找不到。当整个 AI 世界的工具链、教程、优化方案都围绕着 CUDA 构建时，不用 NVIDIA 就相当于：
+- 在智能手机时代坚持用 BP 机
+- 在电动汽车时代自己造加油站
+- 在 TikTok 时代做电视购物广告 </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

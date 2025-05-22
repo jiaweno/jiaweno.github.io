@@ -1,0 +1,804 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jiaweno.github.io/other/%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90.html">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>大型语言模型技术解析 - My Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../index.html" title="My Docs" class="md-header__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              大型语言模型技术解析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="My Docs" class="md-nav__button md-logo" aria-label="My Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    1.大模型基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            1.大模型基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅前言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✅大模型专业术语解释
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▍基础定义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▍发展里程碑
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▍核心架构原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="▍核心架构原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 自注意力机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 训练范式演进
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 文本生成控制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▍关键技术图谱
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="▍关键技术图谱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tokenizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 分词器（Tokenizer）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 推理加速
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 扩展架构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      大语言模型简明指南（小白友好版）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="大语言模型简明指南（小白友好版）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、核心概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、训练全流程（分三步走）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、关键技术点（4大核心）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、直观理解工具
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、常见应用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、你需要知道的3个事实
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">大型语言模型技术解析</h1>
+<h2 id="_2">▍基础定义</h2>
+<p><strong>大语言模型 (LLM)</strong> = Transformer架构 × 海量文本数据 × 分布式训练<br />
+核心能力：通过<strong>概率建模</strong>实现上下文感知的文本生成与理解</p>
+<hr />
+<h2 id="_3">▍发展里程碑</h2>
+<pre><code class="language-mermaid">timeline
+    title LLM进化史
+    section 史前时代
+    2013 : Word2Vec问世（词向量革命）
+    2015 : Seq2Seq架构应用于翻译
+    section 奠基时期
+    2017 : Transformer论文发表（&quot;Attention is All You Need&quot;）
+    2018 :  
+        GPT-1（1.17亿参数）  
+        BERT（双向注意力突破）
+    section 爆发阶段
+    2020 : GPT-3（175B参数）  
+            T5（统一文本到文本框架）
+    2022 :  
+        ChatGPT（RLHF对齐技术）  
+        LLaMA开源（65B参数）
+    2023 : GPT-4 Turbo（多模态+128k上下文）
+</code></pre>
+<hr />
+<h2 id="_4">▍核心架构原理</h2>
+<h3 id="1">1. 自注意力机制</h3>
+<ul>
+<li><strong>计算过程</strong>：<br />
+  Q（Query）· K（Key）矩阵 → Softmax归一化 → 加权V（Value）</li>
+<li><strong>多头机制</strong>：并行捕获不同类型语义关系（类比CNN多通道）</li>
+</ul>
+<h3 id="2">2. 训练范式演进</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>数据规模</th>
+<th>典型方法</th>
+<th>代表模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预训练</td>
+<td>TB级</td>
+<td>MLM/NSP/自回归</td>
+<td>BERT/GPT</td>
+</tr>
+<tr>
+<td>微调</td>
+<td>万级样本</td>
+<td>任务特定头</td>
+<td>T5适配器</td>
+</tr>
+<tr>
+<td>指令微调</td>
+<td>千级示例</td>
+<td>人类反馈强化学习(RLHF)</td>
+<td>InstructGPT</td>
+</tr>
+<tr>
+<td>持续预训练</td>
+<td>增量数据</td>
+<td>领域自适应</td>
+<td>Med-PaLM</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">3. 文本生成控制</h3>
+<pre><code class="language-python"># 经典生成配置示例
+generation_config = {
+    &quot;temperature&quot;: 0.7,  # 平滑概率分布
+    &quot;top_p&quot;: 0.9,        # 核采样阈值
+    &quot;repetition_penalty&quot;: 1.2,  # 抑制重复
+    &quot;max_new_tokens&quot;: 500
+}
+</code></pre>
+<hr />
+<h2 id="_5">▍关键技术图谱</h2>
+<h3 id="1-tokenizer">1. 分词器（Tokenizer）</h3>
+<ul>
+<li><strong>BBPE</strong>：字节级BPE，解决罕见词问题（如"🔥"→字节分解）</li>
+<li>中文特殊处理：<br />
+  ▸ 词粒度 vs 字粒度平衡<br />
+  ▸ 新词发现算法（如BPE-dropout）</li>
+</ul>
+<h3 id="2_1">2. 推理加速</h3>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>原理</th>
+<th>收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KV缓存</td>
+<td>避免重复计算历史键值</td>
+<td>速度↑300%</td>
+</tr>
+<tr>
+<td>量化</td>
+<td>FP32→INT8精度转换</td>
+<td>显存↓50%</td>
+</tr>
+<tr>
+<td>FlashAttention</td>
+<td>优化显存访问模式</td>
+<td>训练效率↑30%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_1">3. 扩展架构</h3>
+<ul>
+<li><strong>MoE架构</strong>：<br />
+  ▸ 每层包含多个专家网络<br />
+  ▸ 门控机制动态路由（如Switch Transformer）<br />
+  ▸ 典型实现：Google的GLaM（1.2T参数，实际激活参数仅96B）</li>
+</ul>
+<h3 id="_6">大语言模型简明指南（小白友好版）</h3>
+<h4 id="_7">一、核心概念</h4>
+<p>大语言模型就像个超级会聊天的"文字大脑"，它能：
+- 📖 续写你开头的故事
+- ❓ 回答各种问题（比如"怎么种多肉植物"）
+- 💡 生成创意内容（写诗、菜谱、代码）</p>
+<p><strong>举个栗子</strong>：你输入"周末去露营要带...", 它能续写"帐篷、防潮垫、驱蚊液等物品"。</p>
+<hr />
+<h4 id="_8">二、训练全流程（分三步走）</h4>
+<ol>
+<li><strong>数据准备阶段</strong>  </li>
+<li><strong>数据收集</strong>：吃下整个互联网的文本（书籍、网页、论文等）<br />
+     → 相当于让模型读完了全世界的图书馆</li>
+<li><strong>数据清洗</strong>：过滤黄赌毒/广告/乱码内容<br />
+     → 像给食材摘菜去泥沙</li>
+<li>
+<p><strong>分词处理</strong>：把句子切成小零件（如"人工智能" → ["人工","智能"]）<br />
+     → 类似学英语先背单词</p>
+</li>
+<li>
+<p><strong>模型训练阶段</strong>  </p>
+</li>
+<li><strong>架构选择</strong>：使用Transformer结构（带注意力机制的神经网络）<br />
+     → 类似人脑神经元，但专为处理文字设计</li>
+<li><strong>预训练</strong>：让模型玩"填空游戏"（遮住部分文字猜内容）<br />
+     → 用数千张显卡训练数月，成本≈造艘游艇</li>
+<li>
+<p><strong>微调</strong>：教模型特定技能（如礼貌对话、写代码）<br />
+     → 类似让学霸专门备考律师/医生资格证</p>
+</li>
+<li>
+<p><strong>部署使用阶段</strong>  </p>
+</li>
+<li><strong>压缩瘦身</strong>：通过量化技术减小模型体积<br />
+     → 把百科全书压缩到手机里</li>
+<li><strong>接口封装</strong>：做成聊天窗口/API接口<br />
+     → 给模型装个可视化的操作面板</li>
+</ol>
+<hr />
+<h4 id="4">三、关键技术点（4大核心）</h4>
+<ol>
+<li><strong>注意力机制</strong>  </li>
+<li><strong>作用</strong>：让模型像用荧光笔一样，聚焦关键信息  </li>
+<li>
+<p><strong>示例</strong>：<br />
+     问："李白和杜甫谁更爱喝酒？"<br />
+     模型会重点看"李白"、"杜甫"、"喝酒"这些词</p>
+</li>
+<li>
+<p><strong>Transformer结构</strong>  </p>
+</li>
+<li><strong>组成模块</strong>：  <ul>
+<li><strong>编码器</strong>：理解输入文字的含义  </li>
+<li><strong>解码器</strong>：生成合理的回复内容  </li>
+</ul>
+</li>
+<li>
+<p><strong>优势</strong>：能处理长文本（相比早期RNN模型）</p>
+</li>
+<li>
+<p><strong>预训练+微调模式</strong>  </p>
+</li>
+<li><strong>预训练</strong>：通用知识学习（花费95%时间）<br />
+     → 学会中文语法、物理常识等基础知识</li>
+<li>
+<p><strong>微调</strong>：专项技能培训（花费5%时间）<br />
+     → 学习安全回复、医疗术语等专业内容</p>
+</li>
+<li>
+<p><strong>生成控制技术</strong>  </p>
+</li>
+<li><strong>温度调节</strong>：控制回答的创意程度  <ul>
+<li>高温（1.0）：天马行空（可能胡编乱造）  </li>
+<li>低温（0.1）：保守准确（可能枯燥死板）</li>
+</ul>
+</li>
+<li><strong>惩罚重复</strong>：避免车轱辘话来回说</li>
+</ol>
+<hr />
+<h4 id="_9">四、直观理解工具</h4>
+<p><strong>类比理解</strong>：<br />
+- 训练数据 → 模型的大脑知识库<br />
+- 模型参数 → 脑神经连接强度<br />
+- GPU算力 → 思考速度<br />
+- 注意力机制 → 思维聚焦能力</p>
+<p><strong>生活场景对比</strong>：<br />
+| 人类学习         | 模型训练         |
+| ---------------- | ---------------- |
+| 读书看报积累知识 | 吃入TB级文本数据 |
+| 老师批改作业     | 损失函数计算误差 |
+| 考试检验水平     | 验证集测试精度   |</p>
+<hr />
+<h4 id="_10">五、常见应用场景</h4>
+<ol>
+<li><strong>智能客服</strong>：7x24小时自动回复<br />
+   → 比如淘宝"小二"自动处理退货请求</li>
+<li><strong>内容创作</strong>：生成营销文案/短视频脚本<br />
+   → 小红书博主1小时产出10篇笔记</li>
+<li><strong>教育辅导</strong>：讲解数学题/修改作文<br />
+   → 如"作业帮"拍照解题功能</li>
+<li><strong>编程辅助</strong>：自动补全代码/找bug<br />
+   → GitHub Copilot帮程序员写代码</li>
+</ol>
+<hr />
+<h4 id="3_2">六、你需要知道的3个事实</h4>
+<ol>
+<li><strong>不是真智能</strong>：本质是高级文字概率预测器<br />
+   → 像超级加强版的手机输入法联想功能</li>
+<li><strong>可能说错话</strong>：会一本正经地编造错误答案<br />
+   → 使用时需要交叉验证信息</li>
+<li><strong>依赖算力</strong>：训练需数百张显卡，但使用阶段普通电脑也能跑<br />
+   → 类似发电厂造电贵，但家庭用电便宜</li>
+</ol>
+<p>通过这个框架，即使没有技术背景，也能理解大语言模型如何"吃数据→练脑子→做任务"。实际技术细节要复杂得多，但掌握这些要点就能理解基本原理啦！ </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
