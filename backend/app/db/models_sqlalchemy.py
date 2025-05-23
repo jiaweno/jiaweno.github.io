@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, Boolean, DateTime, func, Text, ForeignKey, Enum as SAEnum, Integer
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship # Added relationship
+from sqlalchemy import Column, String, Boolean, DateTime, func, Text, ForeignKey, Enum as SAEnum, Integer, Float # Added Float
+from sqlalchemy.dialects.postgresql import UUID, JSONB # Added JSONB
+from sqlalchemy.orm import relationship 
 import uuid
 from .base_class import Base 
 from app.models.document_models import DocumentStatus 
+from app.models.learning_models import QuizAttemptStatus, QuestionType # Added QuizAttemptStatus, QuestionType
 
 class User(Base):
     __tablename__ = "users" 
@@ -16,7 +17,6 @@ class User(Base):
     is_superuser = Column(Boolean(), default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
-    # learning_paths = relationship("LearningPath", back_populates="user") # If User model needs this
 
 class Document(Base):
     __tablename__ = "documents" 
@@ -63,7 +63,6 @@ class LearningPath(Base):
         order_by="LearningPathKnowledgePoint.sequence_order", 
         cascade="all, delete-orphan" 
     )
-    # user = relationship("User", back_populates="learning_paths") # Uncomment if User.learning_paths is defined
 
 class LearningPathKnowledgePoint(Base):
     __tablename__ = "learning_path_knowledge_points"
@@ -78,6 +77,40 @@ class LearningPathKnowledgePoint(Base):
     learning_path = relationship("LearningPath", back_populates="knowledge_point_associations")
     knowledge_point = relationship("KnowledgePoint") 
 
-    # from sqlalchemy import UniqueConstraint # Add if using UniqueConstraint
-    # __table_args__ = (UniqueConstraint('learning_path_id', 'knowledge_point_id', name='_lp_kp_uc'),
-    #                   UniqueConstraint('learning_path_id', 'sequence_order', name='_lp_sequence_uc'))
+# --- New Quiz Attempt SQLAlchemy Models ---
+class QuizAttempt(Base):
+    __tablename__ = "quiz_attempts"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    
+    source_learning_path_id = Column(UUID(as_uuid=True), ForeignKey("learning_paths.id"), nullable=True)
+    source_knowledge_point_id = Column(UUID(as_uuid=True), ForeignKey("knowledge_points.id"), nullable=True)
+
+    status = Column(SAEnum(QuizAttemptStatus, name="quiz_attempt_status_enum", create_type=False), nullable=False, default=QuizAttemptStatus.IN_PROGRESS)
+    score = Column(Float, nullable=True)
+    
+    attempted_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    attempted_questions = relationship(
+        "AttemptedQuestionAnswer", 
+        back_populates="quiz_attempt",
+        cascade="all, delete-orphan"
+    )
+
+class AttemptedQuestionAnswer(Base):
+    __tablename__ = "attempted_question_answers"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    quiz_attempt_id = Column(UUID(as_uuid=True), ForeignKey("quiz_attempts.id"), nullable=False)
+    
+    question_text = Column(Text, nullable=False)
+    question_type = Column(SAEnum(QuestionType, name="question_type_enum", create_type=False), nullable=False)
+    options = Column(JSONB, nullable=True) # Stores List[QuestionOption]
+
+    submitted_answer_data = Column(JSONB, nullable=True) # Stores UserAnswerData
+    is_correct = Column(Boolean, nullable=True)
+    score = Column(Float, default=0.0)
+
+    quiz_attempt = relationship("QuizAttempt", back_populates="attempted_questions")
