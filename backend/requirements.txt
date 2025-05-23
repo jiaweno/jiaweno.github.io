@@ -1,0 +1,20 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+sqlalchemy # For ORM - or use SQLModel, Tortoise-ORM etc.
+psycopg2-binary # PostgreSQL adapter
+redis # Redis client
+# For JWT
+python-jose[cryptography]
+passlib[bcrypt]
+boto3 # for AWS S3
+rq # For background tasks
+pytesseract # For OCR
+# Pillow is a dependency for pytesseract, usually installed with it.
+openai
+qdrant-client
+nltk
+tiktoken
+# Add other dependencies as needed:
+# pinecone-client or qdrant-client # qdrant-client is now added

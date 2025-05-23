@@ -1,0 +1,16 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  deploy-placeholder:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+    - name: Placeholder Deployment Step
+      run: |
+        echo "This is a placeholder for the deployment process."
+        echo "Actual deployment scripts for Docker build/push and Kubernetes/EKS apply will be added here."
+        echo "Deployment environments (e.g., staging, production) and secrets would be configured here."
