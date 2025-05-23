@@ -3,7 +3,15 @@
 
 from .base_class import Base
 # Import your SQLAlchemy models here so they are registered with Base
-from .models_sqlalchemy import User, Document, KnowledgePoint, LearningPath, LearningPathKnowledgePoint # Added LearningPath and LearningPathKnowledgePoint
+from .models_sqlalchemy import (
+    User, 
+    Document, 
+    KnowledgePoint, 
+    LearningPath, 
+    LearningPathKnowledgePoint,
+    QuizAttempt,                 # Added
+    AttemptedQuestionAnswer      # Added
+)
 
 # You might also want to define a function to initialize tables for dev/testing
 # def init_db(engine):
